@@ -1,0 +1,83 @@
+<?php
+/**
+* Pacific NM (https://www.pacificnm.com)
+*
+* @link      https://github.com/pacificnm/pnm for the canonical source repository
+* @copyright Copyright (c) 20011-2016 Pacific NM USA Inc. (https://www.pacificnm.com)
+* @license
+*/
+?>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">
+					<i class="<?php echo $this->layout()->pageIcon; ?>" aria-hidden="true"></i>
+					<?php echo $this->translate("Application Menu"); ?> 
+					<small><?php echo $this->translate("Page"); ?>: <?php echo $this->page; ?></small>
+				</h3>
+				<div class="box-tools">
+					<?php echo $this->searchButton("menu-search"); ?>
+					
+					<?php echo $this->createButton("menu-create"); ?>
+				</div>
+			</div> 
+            <?php if($this->paginator->count() == 0): ?>
+			<div class="box-body">
+				<div class="alert alert-info">
+					<p>
+						<i class="fa fa-info-circle" aria-hidden="true"></i> 
+						<?php echo $this->translate("No entities found"); ?>
+					</p>
+				</div>
+			</div>
+			<?php else: ?>
+			<div class="box-body  no-padding">
+				<table class="table table-bordered table-hover table-striped table-condensed">
+					<thead>
+						<tr>
+							<th><?php echo $this->translate("Name");?></th>
+							<th><?php echo $this->translate("Route"); ?></th>
+							<th><?php echo $this->translate("Icon"); ?></th>
+							<th><?php echo $this->translate("Location"); ?></th>
+							<th><?php echo $this->translate("Order"); ?></th>
+							<th><?php echo $this->translate("Active"); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+					<?php foreach($this->paginator as $entity): ?>
+						<tr>
+							<td>
+								<a href="<?php echo $this->url("menu-view", array("id" => $entity->getMenuId())); ?>" title="<?php echo $this->translate("View")?>">
+									<?php echo $entity->getMenuName();?>
+								</a>
+							</td>
+							<td><?php echo $entity->getMenuRoute(); ?></td>
+							<td><?php echo $entity->getMenuIcon(); ?></td>
+							<td><?php echo $entity->getMenuLocation(); ?>
+							<td><?php echo $entity->getMenuOrder(); ?></td>
+							<td><?php echo ($entity->getMenuActive() == 1 ? $this->translate("Yes"): $this->translate("No")); ?></td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+				
+				<div class="row">
+					<div class="col-xs-12 text-center">
+						<?php echo $this->Paginator(
+							$this->itemCountPerPage, 
+							$this->itemCount, 
+							$this->pageCount, 
+                            $this->page, 
+                            $this->routeParams,
+                            $this->queryParams);
+                        ?>
+					</div>
+				</div>
+			</div>
+			<?php endif;?>
+		</div>
+	</div>
+</div>
+
+<?php echo $this->menuSearchForm($this->queryParams); ?>

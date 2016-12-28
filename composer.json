@@ -1,0 +1,14 @@
+{
+    "name": "pacificnm/pacificnm-menu",
+    "description": "Provides menus and menu management",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Jaimie Garner",
+            "email": "pacificnm@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

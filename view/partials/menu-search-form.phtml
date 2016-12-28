@@ -1,0 +1,81 @@
+<form method="get" class="form-horizontal">
+	<div class="modal fade" tabindex="-1" role="dialog" id="menu-search">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">
+						<i class="fa fa-list" aria-hidden="true"></i>
+					<?php echo $this->translate('Menu Search'); ?></h4>
+				</div>
+				<div class="modal-body">
+				
+					<div class="form-group">
+						<label for="menuRoute" class="col-sm-2 control-label"><?php echo $this->translate("Name")?></label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="menuName" name="menuName" value="<?php echo $this->queryParams["menuName"]; ?>">
+						</div>
+					</div>
+				
+					<div class="form-group">
+						<label for="menuRoute" class="col-sm-2 control-label"><?php echo $this->translate("Route")?></label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="menuRoute" name="menuRoute" value="<?php echo $this->queryParams["menuRoute"]; ?>">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="menuLocation" class="col-sm-2 control-label"><?php echo $this->translate('Location'); ?>:</label>
+						<div class="col-sm-10">
+							<select class="form-control" name="menuLocation" id="menuLocation">
+								<option value=""><?php echo $this->translate('Select'); ?></option>
+        						
+        						<option value="Top"
+									<?php if(array_key_exists('menuLocation', $this->queryParams) && $this->queryParams['menuLocation'] == "Top"):?>
+									selected <?php endif;?>><?php echo $this->translate("Top"); ?>
+        						</option>
+        						<option value="Left"
+									<?php if(array_key_exists('menuLocation', $this->queryParams) && $this->queryParams['menuLocation'] == "Left"):?>
+									selected <?php endif;?>><?php echo $this->translate("Left"); ?>
+        						</option>
+        						<option value="Right"
+									<?php if(array_key_exists('menuLocation', $this->queryParams) && $this->queryParams['menuLocation'] == "Right"):?>
+									selected <?php endif;?>><?php echo $this->translate("Right"); ?>
+        						</option>
+        						<option value="Bottom"
+									<?php if(array_key_exists('menuLocation', $this->queryParams) && $this->queryParams['menuLocation'] == "Bottom"):?>
+									selected <?php endif;?>><?php echo $this->translate("Bottom"); ?>
+        						</option>
+        					</select>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="aclResourceId" class="col-sm-2 control-label"><?php echo $this->translate('Active'); ?>:</label>
+						<div class="col-sm-10">
+							<select class="form-control" name="menuActive" id="menuActive">
+								<option value=""><?php echo $this->translate('Select'); ?></option>
+        						
+        						<option value="1"
+									<?php if(array_key_exists('menuActive', $this->queryParams) && $this->queryParams['menuActive'] == "1"):?>
+									selected <?php endif;?>><?php echo $this->translate("Yes"); ?>
+        						</option>
+        						<option value="0"
+									<?php if(array_key_exists('menuActive', $this->queryParams) && $this->queryParams['menuActive'] == "0"):?>
+									selected <?php endif;?>><?php echo $this->translate("No"); ?>
+        						</option>
+        					</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->translate('Close'); ?></button>
+					<button type="submit" class="btn btn-primary"><?php echo $this->translate('Search'); ?></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

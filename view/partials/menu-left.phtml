@@ -1,0 +1,51 @@
+<?php 
+if(! $this->identity()) {
+    $aclRoleName = "guest";
+} else {
+    $aclRoleName = $this->identity()->getAclRoleEntity()->getAclRoleName();
+}
+?>
+
+<?php if(! $this->entitys): ?>
+<li  class="treeview">
+	<div class="alert alert-info">
+		<i class="fa fa-info-circle"></i> <?php echo $this->translate('No menu items'); ?>
+	</div>
+</li>
+<?php else: ?>
+<?php foreach($this->entitys as $entity): ?>
+
+<?php if($this->acl()->isAllowed($aclRoleName, $entity->getMenuRoute()) ): ?>
+
+<li class="treeview <?php if($this->layout()->activeMenuItem == $entity->getMenuRoute()):?>active<?php endif;?>">
+	<a href="#">
+		<i class="<?php echo $entity->getMenuIcon(); ?>" aria-hidden="true"></i> 
+		<span><?php echo $this->translate($entity->getMenuName()); ?></span>
+		<i class="fa fa-angle-left pull-right"></i>
+	</a>
+	
+	<?php if($entity->getMenuItemEntity()->count() > 0): ?>
+	
+	<ul class="treeview-menu">
+		<?php foreach($entity->getMenuItemEntity() as $menuItemEntity): ?>
+		
+		<?php if($this->acl()->isAllowed($aclRoleName, $menuItemEntity->getMenuItemRoute()) ): ?>
+		
+		<li <?php if($this->layout()->activeSubMenuItem == $menuItemEntity->getMenuItemRoute()):?>class="active"<?php endif;?>>
+			
+			<a href="<?php echo $this->url($menuItemEntity->getMenuItemRoute()); ?>" 
+				title="<?php echo $menuItemEntity->getMenuItemName(); ?>">
+				<i class="<?php echo $menuItemEntity->getMenuItemIcon(); ?>" aria-hidden="true"></i>
+				<?php echo $menuItemEntity->getMenuItemName(); ?>
+			</a>
+		</li>
+		<?php endif; ?>
+		
+		<?php endforeach;?>
+	</ul>
+	<?php endif;?>
+</li>
+<?php endif; ?>
+<?php endforeach;?>
+
+<?php endif; ?>
