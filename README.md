@@ -1,6 +1,6 @@
 # pacificnm-Menu
 
-Provides a lightweight and flexible menus.
+Provides menu services and management for PacificNM.
 
 File issues at https://github.com/pacificnm/pacificnm-menu/issues
 
