@@ -13,7 +13,9 @@ class FormFactory
      */
     public function __invoke(ServiceLocatorInterface $serviceLocator)
     {
-        return new Form();
+        $pageService = $serviceLocator->get('Pacificnm\Page\Service\ServiceInterface');
+        
+        return new Form($pageService);
     }
 }
 

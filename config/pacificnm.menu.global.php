@@ -3,7 +3,7 @@ return array(
     'module' => array(
         'Menu' => array(
             'name' => 'Menu',
-            'version' => '1.0.5',
+            'version' => '1.0.6',
             'install' => array(
                 'require' => array(),
                 'sql' => 'sql/menu.sql'

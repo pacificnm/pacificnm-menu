@@ -36,15 +36,19 @@ class MenuHelper extends AbstractHelper
         
         $entitys = $this->service->getAll(array(
             'pagination' => 'off',
-            'menuLocation' => $menuLocation
+            'menuLocation' => $menuLocation,
+            'menuActive' => 1
         ));
         
         
         $data->entitys = $entitys;
         
         switch ($menuLocation) {
-            case 'Top':
-                return $partialHelper('partials/menu-top.phtml', $data);
+            case 'Top-Left':
+                return $partialHelper('partials/menu-top-left.phtml', $data);
+                break;
+            case 'Top-Right':    
+                return $partialHelper('partials/menu-top-right.phtml', $data);
                 break;
             case 'Left':
                 return $partialHelper('partials/menu-left.phtml', $data);
@@ -67,7 +71,8 @@ class MenuHelper extends AbstractHelper
     protected function validLocations($menuLocation)
     {
         $haystack = array(
-            'Top',
+            'Top-Left',
+            'Top-Right',
             'Left',
             'Right',
             'Bottom'

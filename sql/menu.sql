@@ -3,16 +3,16 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 26, 2016 at 10:34 AM
+-- Generation Time: Jan 08, 2017 at 04:39 PM
 -- Server version: 10.0.28-MariaDB-0+deb8u1
--- PHP Version: 5.6.27-0+deb8u1
+-- PHP Version: 5.6.29-0+deb8u1
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `camper`
+-- Database: `test`
 --
 
 -- --------------------------------------------------------
@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `menu_name` varchar(100) NOT NULL,
   `menu_icon` varchar(100) NOT NULL,
   `menu_order` int(3) unsigned NOT NULL,
-  `menu_location` enum('Top','Left','Right','Bottom') NOT NULL DEFAULT 'Left',
+  `menu_location` enum('Top-Right','Top-Left','Left','Right','Bottom') NOT NULL DEFAULT 'Left',
   `menu_active` int(3) unsigned NOT NULL DEFAULT '1'
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables

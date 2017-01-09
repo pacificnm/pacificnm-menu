@@ -6,21 +6,30 @@ use Zend\Form\Form as ZendForm;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Pacificnm\Menu\Hydrator\Hydrator;
 use Pacificnm\Menu\Entity\Entity;
+use Pacificnm\Page\Service\ServiceInterface as PageServiceInterface;
 
 class Form extends ZendForm implements InputFilterProviderInterface
 {
     /**
      * 
+     * @var PageServiceInterface
+     */
+    protected $pageService;
+    
+    /**
+     * 
      * @param string $name
      * @param array $options
      */
-    public function __construct($name = 'menu-form', $options = array())
+    public function __construct(PageServiceInterface $pageService, $name = 'menu-form', $options = array())
     {
         parent::__construct($name, $options);
     
         $this->setHydrator(new Hydrator(false));
     
         $this->setObject(new Entity());
+        
+        $this->pageService = $pageService;
         
         // menuId
         $this->add(array(
@@ -34,9 +43,10 @@ class Form extends ZendForm implements InputFilterProviderInterface
         // menuRoute
         $this->add(array(
             'name' => 'menuRoute',
-            'type' => 'Text',
+            'type' => 'Select',
             'options' => array(
-                'label' => 'Route:'
+                'label' => 'Route:',
+                'value_options' => $this->getPageOptions()
             ),
             'attributes' => array(
                 'class' => 'form-control',
@@ -76,7 +86,8 @@ class Form extends ZendForm implements InputFilterProviderInterface
             'options' => array(
                 'label' => 'Menu Location:',
                 'value_options' => array(
-                    'Top' => 'Top',
+                    'Top-Right' => 'Top Right',
+                    'Top-Left' => 'Top Left',
                     'Left' => 'Left',
                     'Right' => 'Right',
                     'Bottom' => 'Bottom'
@@ -137,6 +148,25 @@ class Form extends ZendForm implements InputFilterProviderInterface
     {
         // TODO Auto-generated method stub
         
+    }
+    
+    /**
+     * 
+     * @return string[]
+     */
+    protected function getPageOptions()
+    {
+        $options = array();
+        
+        $entitys = $this->pageService->getAll(array(
+            'pagination' => 'off',
+        ));
+        
+        foreach($entitys as $entity) {
+            $options[$entity->getPageRoute()] = $entity->getPageRoute() . ' ' . $entity->getPageName();
+        }
+        
+        return $options;
     }
 
 }

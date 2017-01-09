@@ -146,7 +146,7 @@ class RestController extends AbstractRestfulController
     
         $countPerPage = $this->params()->fromQuery('countPerPage', 25);
     
-        $filter = array();
+        $filter = array( );
     
         $entitys = $this->service->getAll($filter);
     
